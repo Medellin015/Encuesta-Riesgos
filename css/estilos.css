@@ -1,0 +1,35 @@
+/* ===== Animaciones y ajustes propios ===== */
+:root { color-scheme: light dark; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes pop { 0% { transform: scale(.96); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+.anim-fade { animation: fadeIn .35s ease both; }
+.anim-up   { animation: slideUp .45s cubic-bezier(.2,.7,.3,1) both; }
+.anim-pop  { animation: pop .3s ease both; }
+
+/* Scrollbar discreta */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: #c8ccd4; border-radius: 999px; border: 2px solid transparent; background-clip: content-box; }
+.dark ::-webkit-scrollbar-thumb { background: #3a4150; background-clip: content-box; }
+::-webkit-scrollbar-track { background: transparent; }
+
+/* Transición de vistas */
+.vista { display: none; }
+.vista.activa { display: block; }
+
+/* Tarjeta base */
+.tarjeta { transition: box-shadow .25s ease, transform .25s ease, border-color .25s ease; }
+
+/* Chip de opción tipo formulario */
+.opcion { transition: all .18s ease; }
+.opcion:hover { border-color: #9cc84a; }
+.opcion.sel { border-color: #7fae2f; background: rgba(156,200,74,.12); box-shadow: 0 0 0 1px #7fae2f inset; }
+
+/* Toast */
+#toasts { position: fixed; z-index: 90; right: 1rem; bottom: 1rem; display: flex; flex-direction: column; gap: .5rem; }
+.toast { animation: slideUp .3s ease both; }
+
+/* Ocultar spinners de number si hubiera */
+input:focus, textarea:focus, select:focus { outline: none; }
+
+canvas { max-width: 100%; }

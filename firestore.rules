@@ -1,0 +1,31 @@
+rules_version = '2';
+
+// Reglas de seguridad de Firestore · Encuesta de Autoevaluación de Riesgos
+// Los usuarios se autentican de forma anónima al abrir la aplicación.
+//
+// Estas reglas YA ESTÁN DESPLEGADAS en el proyecto «encuesta-riesgos».
+// Este archivo es la copia versionada; para volver a desplegarlas puede usar
+// la CLI de Firebase:  firebase deploy --only firestore:rules
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Colección de respuestas de la encuesta.
+    match /respuestas/{documento} {
+      // El tablero de resultados lee las respuestas (requiere sesión).
+      allow read: if request.auth != null;
+
+      // Cualquier usuario autenticado (anónimo) puede registrar su respuesta,
+      // siempre que el documento incluya su propio uid.
+      allow create: if request.auth != null
+                    && request.resource.data.uid == request.auth.uid;
+
+      // Las respuestas no se modifican ni se eliminan desde el cliente.
+      allow update, delete: if false;
+    }
+
+    // Todo lo demás queda denegado por defecto.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
