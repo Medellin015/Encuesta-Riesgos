@@ -237,7 +237,11 @@ function actualizarCondicionales() {
   // Campo "Otro" del riesgo 3: habilitado solo si se elige "otro".
   const inputOtro = $('#f-r3-otro');
   inputOtro.disabled = r3 !== 'otro';
-  if (r3 !== 'otro') inputOtro.value = '';
+  if (r3 !== 'otro') {
+    inputOtro.value = '';
+    const eo = $('#err-r3-otro');
+    if (eo) eo.classList.add('hidden');
+  }
 }
 
 // Marca/limpia error en un contenedor de pregunta.
@@ -290,11 +294,15 @@ function validar() {
       if (!el.value.trim()) fallar(cont); else marcarError(cont, false);
     });
   }
-  // "Otro" en riesgo 3
+  // "Otro" en riesgo 3: valida el texto libre con su propio mensaje (no el genérico).
   const r3 = (form.querySelector('input[name="riesgo3_tipo"]:checked') || {}).value;
+  const errOtro = $('#err-r3-otro');
   if (r3 === 'otro' && !$('#f-r3-otro').value.trim()) {
-    const cont = form.querySelector('[data-radios="riesgo3_tipo"]').closest('fieldset');
-    fallar(cont);
+    errOtro.classList.remove('hidden');
+    ok = false;
+    if (!primerError) primerError = $('#f-r3-otro');
+  } else {
+    errOtro.classList.add('hidden');
   }
 
   // Condicionales riesgos 4, 5 y 6: si el bloque está visible, contrato y acción son obligatorios.
