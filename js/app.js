@@ -228,6 +228,12 @@ function actualizarCondicionales() {
   $('#bloque-riesgo2').classList.toggle('hidden', !mostrar2);
   $('#bloque-riesgo3').classList.toggle('hidden', !mostrar3);
 
+  // Riesgos 4, 5 y 6 (cambio climático): el bloque se muestra si la respuesta es "sí".
+  ['riesgo4_tipo', 'riesgo5_tipo', 'riesgo6_tipo'].forEach((name) => {
+    const v = (form.querySelector(`input[name="${name}"]:checked`) || {}).value;
+    $('#bloque-' + name.replace('_tipo', '')).classList.toggle('hidden', v !== 'si');
+  });
+
   // Campo "Otro" del riesgo 3: habilitado solo si se elige "otro".
   const inputOtro = $('#f-r3-otro');
   inputOtro.disabled = r3 !== 'otro';
@@ -253,8 +259,8 @@ function validar() {
     if (!el.value.trim()) fallar(cont); else marcarError(cont, false);
   });
 
-  // Radios obligatorios (siempre): riesgo1, riesgo2, riesgo3, corrupcion
-  ['riesgo1_tipo', 'riesgo2_tipo', 'riesgo3_tipo', 'corrupcion_tipo'].forEach((name) => {
+  // Radios obligatorios (siempre): riesgo1-6 y corrupcion
+  ['riesgo1_tipo', 'riesgo2_tipo', 'riesgo3_tipo', 'riesgo4_tipo', 'riesgo5_tipo', 'riesgo6_tipo', 'corrupcion_tipo'].forEach((name) => {
     const cont = form.querySelector(`[data-radios="${name}"]`).closest('fieldset');
     const marcado = form.querySelector(`input[name="${name}"]:checked`);
     if (!marcado) fallar(cont); else marcarError(cont, false);
@@ -291,6 +297,16 @@ function validar() {
     fallar(cont);
   }
 
+  // Condicionales riesgos 4, 5 y 6: si el bloque está visible, contrato y acción son obligatorios.
+  ['riesgo4', 'riesgo5', 'riesgo6'].forEach((r) => {
+    if (!$('#bloque-' + r).classList.contains('hidden')) {
+      [`#f-${r.replace('riesgo', 'r')}-contrato`, `#f-${r.replace('riesgo', 'r')}-accion`].forEach((sel) => {
+        const el = $(sel); const cont = el.closest('.pregunta');
+        if (!el.value.trim()) fallar(cont); else marcarError(cont, false);
+      });
+    }
+  });
+
   if (primerError) primerError.scrollIntoView({ behavior: 'smooth', block: 'center' });
   return ok;
 }
@@ -303,6 +319,9 @@ function recolectar() {
   const r1 = radio('riesgo1_tipo');
   const r2 = radio('riesgo2_tipo');
   const r3 = radio('riesgo3_tipo');
+  const r4 = radio('riesgo4_tipo');
+  const r5 = radio('riesgo5_tipo');
+  const r6 = radio('riesgo6_tipo');
   return {
     nombre: val('#f-nombre'),
     unidad: val('#f-unidad'),
@@ -317,6 +336,15 @@ function recolectar() {
     riesgo3_otro: r3 === 'otro' ? val('#f-r3-otro') : '',
     riesgo3_contrato: r3 !== 'no_afectado' ? val('#f-r3-contrato') : '',
     riesgo3_accion: r3 !== 'no_afectado' ? val('#f-r3-accion') : '',
+    riesgo4_tipo: r4,
+    riesgo4_contrato: r4 === 'si' ? val('#f-r4-contrato') : '',
+    riesgo4_accion: r4 === 'si' ? val('#f-r4-accion') : '',
+    riesgo5_tipo: r5,
+    riesgo5_contrato: r5 === 'si' ? val('#f-r5-contrato') : '',
+    riesgo5_accion: r5 === 'si' ? val('#f-r5-accion') : '',
+    riesgo6_tipo: r6,
+    riesgo6_contrato: r6 === 'si' ? val('#f-r6-contrato') : '',
+    riesgo6_accion: r6 === 'si' ? val('#f-r6-accion') : '',
     corrupcion_tipo: radio('corrupcion_tipo'),
     observaciones: val('#f-observaciones')
   };
@@ -339,10 +367,16 @@ function restaurarBorrador() {
   setVal('#f-r2-contrato', data.riesgo2_contrato); setVal('#f-r2-accion', data.riesgo2_accion);
   setVal('#f-r3-contrato', data.riesgo3_contrato); setVal('#f-r3-accion', data.riesgo3_accion);
   setVal('#f-r3-otro', data.riesgo3_otro); setVal('#f-observaciones', data.observaciones);
+  setVal('#f-r4-contrato', data.riesgo4_contrato); setVal('#f-r4-accion', data.riesgo4_accion);
+  setVal('#f-r5-contrato', data.riesgo5_contrato); setVal('#f-r5-accion', data.riesgo5_accion);
+  setVal('#f-r6-contrato', data.riesgo6_contrato); setVal('#f-r6-accion', data.riesgo6_accion);
   const marcarRadio = (name, v) => { const el = form.querySelector(`input[name="${name}"][value="${v}"]`); if (el) el.checked = true; };
   if (data.riesgo1_tipo) marcarRadio('riesgo1_tipo', data.riesgo1_tipo);
   if (data.riesgo2_tipo) marcarRadio('riesgo2_tipo', data.riesgo2_tipo);
   if (data.riesgo3_tipo) marcarRadio('riesgo3_tipo', data.riesgo3_tipo);
+  if (data.riesgo4_tipo) marcarRadio('riesgo4_tipo', data.riesgo4_tipo);
+  if (data.riesgo5_tipo) marcarRadio('riesgo5_tipo', data.riesgo5_tipo);
+  if (data.riesgo6_tipo) marcarRadio('riesgo6_tipo', data.riesgo6_tipo);
   if (data.corrupcion_tipo) marcarRadio('corrupcion_tipo', data.corrupcion_tipo);
   (data.riesgo1_etapas || []).forEach((v) => marcarRadio('riesgo1_etapas', v) === undefined && (function(){ const el = form.querySelector(`input[name="riesgo1_etapas"][value="${v}"]`); if (el) el.checked = true; })());
   actualizarCondicionales(); pintarOpciones();
@@ -481,14 +515,18 @@ function renderGraficos() {
   const matErr = respuestas.filter((r) => r.riesgo1_tipo && r.riesgo1_tipo !== 'sin_errores').length;
   const matCon = respuestas.filter((r) => r.riesgo2_tipo && r.riesgo2_tipo !== 'sin_conflicto').length;
   const matDes = respuestas.filter((r) => r.riesgo3_tipo && r.riesgo3_tipo !== 'no_afectado').length;
+  const matObr = respuestas.filter((r) => r.riesgo4_tipo === 'si').length;
+  const matMov = respuestas.filter((r) => r.riesgo5_tipo === 'si').length;
+  const matAus = respuestas.filter((r) => r.riesgo6_tipo === 'si').length;
   const matCor = respuestas.filter((r) => r.corrupcion_tipo && r.corrupcion_tipo !== 'ninguna').length;
+  const rep = [matErr, matCon, matDes, matObr, matMov, matAus, matCor];
   crearChart('chart-resumen', {
     type: 'bar',
     data: {
-      labels: ['Errores', 'Conflicto', 'Desacierto', 'Corrupción'],
+      labels: ['Errores', 'Conflicto', 'Desacierto', 'Obras extras', 'Movilidad', 'Ausentismo', 'Corrupción'],
       datasets: [
-        { label: 'Reportado', data: [matErr, matCon, matDes, matCor], backgroundColor: '#7fae2f', borderRadius: 6 },
-        { label: 'No reportado', data: [total - matErr, total - matCon, total - matDes, total - matCor], backgroundColor: '#e2e8f0', borderRadius: 6 }
+        { label: 'Reportado', data: rep, backgroundColor: '#7fae2f', borderRadius: 6 },
+        { label: 'No reportado', data: rep.map((n) => total - n), backgroundColor: '#e2e8f0', borderRadius: 6 }
       ]
     },
     options: baseOpciones({ scales: { x: ejes().x, y: Object.assign(ejes().y, { stacked: true }) } })
@@ -571,15 +609,19 @@ function renderTabla() {
   const filtradas = respuestas.filter((r) => {
     if (!q) return true;
     return [r.nombre, r.unidad, r.riesgo1_contrato, r.riesgo1_accion, r.riesgo2_contrato,
-            r.riesgo2_accion, r.riesgo3_contrato, r.riesgo3_accion, r.riesgo3_otro, r.observaciones]
+            r.riesgo2_accion, r.riesgo3_contrato, r.riesgo3_accion, r.riesgo3_otro,
+            r.riesgo4_contrato, r.riesgo4_accion, r.riesgo5_contrato, r.riesgo5_accion,
+            r.riesgo6_contrato, r.riesgo6_accion, r.observaciones]
       .some((c) => (c || '').toLowerCase().includes(q));
   });
   $('#conteo-tabla').textContent = filtradas.length + (filtradas.length === 1 ? ' registro' : ' registros');
 
   if (!filtradas.length) {
-    tbody.innerHTML = `<tr><td colspan="7" class="px-4 py-8 text-center text-slate-400">Sin coincidencias.</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="10" class="px-4 py-8 text-center text-slate-400">Sin coincidencias.</td></tr>`;
     return;
   }
+  // Píldora Sí/No para los riesgos de tipo binario (4, 5 y 6).
+  const pildoraSiNo = (v) => v === 'si' ? pildora('Sí', 'si') : (v === 'no' ? pildora('No', 'no') : pildora('—', 'neutro'));
   tbody.innerHTML = filtradas.map((r) => {
     const err = r.riesgo1_tipo === 'sin_errores' ? pildora('No', 'no') : pildora(etiqueta('riesgo1_tipo', r.riesgo1_tipo), 'si');
     const con = r.riesgo2_tipo === 'sin_conflicto' ? pildora('No', 'no') : pildora(etiqueta('riesgo2_tipo', r.riesgo2_tipo), 'si');
@@ -592,6 +634,9 @@ function renderTabla() {
       <td class="px-4 py-3">${err}</td>
       <td class="px-4 py-3">${con}</td>
       <td class="px-4 py-3">${des}</td>
+      <td class="px-4 py-3">${pildoraSiNo(r.riesgo4_tipo)}</td>
+      <td class="px-4 py-3">${pildoraSiNo(r.riesgo5_tipo)}</td>
+      <td class="px-4 py-3">${pildoraSiNo(r.riesgo6_tipo)}</td>
       <td class="px-4 py-3">${cor}</td>
     </tr>`;
   }).join('');
@@ -611,10 +656,14 @@ function renderTablero() {
 
 // Exportación a Excel (con plan B a CSV).
 function filasExport() {
+  const siNo = (v) => v === 'si' ? 'Sí' : (v === 'no' ? 'No' : '');
   const cab = ['Fecha', 'Nombre', 'Unidad', 'Periodo',
     'R1 Tipo', 'R1 Etapas', 'R1 Contrato/Motivos', 'R1 Acción',
     'R2 Tipo', 'R2 Contrato/Actores', 'R2 Acción',
     'R3 Tipo', 'R3 Otro', 'R3 Contrato/Motivos', 'R3 Acción',
+    'R4 Obras extras', 'R4 Contrato/Motivos', 'R4 Acción',
+    'R5 Movilidad', 'R5 Contrato/Motivos', 'R5 Acción',
+    'R6 Ausentismo', 'R6 Contrato/Motivos', 'R6 Acción',
     'Corrupción', 'Observaciones'];
   const filas = respuestas.map((r) => [
     fmtFecha(r.creado || r.creadoISO), r.nombre || '', r.unidad || '', r.periodo || '',
@@ -622,6 +671,9 @@ function filasExport() {
     r.riesgo1_contrato || '', r.riesgo1_accion || '',
     etiqueta('riesgo2_tipo', r.riesgo2_tipo), r.riesgo2_contrato || '', r.riesgo2_accion || '',
     etiqueta('riesgo3_tipo', r.riesgo3_tipo), r.riesgo3_otro || '', r.riesgo3_contrato || '', r.riesgo3_accion || '',
+    siNo(r.riesgo4_tipo), r.riesgo4_contrato || '', r.riesgo4_accion || '',
+    siNo(r.riesgo5_tipo), r.riesgo5_contrato || '', r.riesgo5_accion || '',
+    siNo(r.riesgo6_tipo), r.riesgo6_contrato || '', r.riesgo6_accion || '',
     etiqueta('corrupcion_tipo', r.corrupcion_tipo), r.observaciones || ''
   ]);
   return { cab, filas };
