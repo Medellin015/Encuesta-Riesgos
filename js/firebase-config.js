@@ -25,7 +25,7 @@ const firebaseConfig = {
 const COLECCION = 'respuestas';
 
 /* Periodo evaluado (se almacena junto con cada respuesta). */
-const PERIODO_DEFAULT = 'Primer cuatrimestre 2025 (01/12/2024 – 31/03/2025)';
+const PERIODO_DEFAULT = 'Primer Semestre 2026 (01/01/2026 – 30/06/2026)';
 
 /* Clave del borrador local (localStorage) para formularios largos. */
 const BORRADOR_KEY = 'borrador_encuesta_riesgos_v1';

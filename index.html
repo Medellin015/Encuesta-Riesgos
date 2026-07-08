@@ -121,12 +121,12 @@
         <div class="relative">
           <div class="flex flex-wrap items-center gap-2 mb-4">
             <span class="inline-flex items-center gap-1.5 text-[11px] font-semibold tracking-wide uppercase bg-white/20 ring-1 ring-white/30 rounded-full px-3 py-1">
-              <span class="w-1.5 h-1.5 rounded-full bg-sol-300"></span> Primer cuatrimestre 2025
+              <span class="w-1.5 h-1.5 rounded-full bg-sol-300"></span> Primer Semestre 2026
             </span>
             <span class="inline-flex items-center text-[11px] font-medium bg-white/10 ring-1 ring-white/20 rounded-full px-3 py-1">Secretaría de Infraestructura Física</span>
           </div>
           <h2 class="text-2xl sm:text-4xl font-extrabold leading-tight max-w-3xl tracking-tight [text-shadow:0_2px_16px_rgba(0,0,0,.15)]">Encuesta de autoevaluación de riesgos del proceso de Gestión de la Obra Pública</h2>
-          <p class="mt-4 text-sm sm:text-base text-white/90 max-w-2xl">Periodo a evaluar: <b>01 de diciembre de 2024 al 31 de marzo de 2025</b>. Dirigida a subsecretarios, directores técnicos y líderes de programa o proyecto.</p>
+          <p class="mt-4 text-sm sm:text-base text-white/90 max-w-2xl">Periodo a evaluar: <b>01 de enero de 2026 al 30 de junio de 2026</b>. Dirigida a subsecretarios, directores técnicos y líderes de programa o proyecto.</p>
           <p class="mt-3 text-xs text-white/80">Los campos marcados con <span class="font-bold text-sol-200">*</span> son obligatorios.</p>
         </div>
       </div>
@@ -146,13 +146,26 @@
             </div>
             <div>
               <label class="block text-sm font-semibold mb-1.5" for="f-unidad">Unidad <span class="text-rose-500">*</span></label>
-              <input id="f-unidad" name="unidad" type="text" list="lista-unidades" class="campo w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-marca-400 focus:border-marca-400" placeholder="Ej.: Subsecretaría de Construcción" />
-              <datalist id="lista-unidades">
-                <option value="Subsecretaría de Construcción y Mantenimiento"></option>
-                <option value="Subsecretaría de Estudios y Diseños"></option>
-                <option value="Dirección Técnica"></option>
-                <option value="Líder de Programa o Proyecto"></option>
-              </datalist>
+              <select id="f-unidad" name="unidad" class="campo w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-marca-400 focus:border-marca-400">
+                <option value="" selected disabled>Seleccione una unidad…</option>
+                <option value="Equipo de Apoyo a la Contratación">Equipo de Apoyo a la Contratación</option>
+                <option value="Equipo de Gestión de Proyectos">Equipo de Gestión de Proyectos</option>
+                <option value="Equipo de Gestión Socioambiental">Equipo de Gestión Socioambiental</option>
+                <option value="Equipo de Ingeniería">Equipo de Ingeniería</option>
+                <option value="Equipo de Seguimiento">Equipo de Seguimiento</option>
+                <option value="Equipo de Urbanismo Sostenible">Equipo de Urbanismo Sostenible</option>
+                <option value="Equipo Malla Vial e Infraestructura Asociada">Equipo Malla Vial e Infraestructura Asociada</option>
+                <option value="Secretaría de Infraestructura Física">Secretaría de Infraestructura Física</option>
+                <option value="Subsecretaría Construcción y Mantenimiento de la Infraestructura Física">Subsecretaría Construcción y Mantenimiento de la Infraestructura Física</option>
+                <option value="Subsecretaría Planeación de la Infraestructura Física">Subsecretaría Planeación de la Infraestructura Física</option>
+                <option value="Unidad Administrativa">Unidad Administrativa</option>
+                <option value="Unidad de Apoyo Jurídico">Unidad de Apoyo Jurídico</option>
+                <option value="Unidad de Ejecución de Proyectos">Unidad de Ejecución de Proyectos</option>
+                <option value="Unidad de Estudios y Diseños">Unidad de Estudios y Diseños</option>
+                <option value="Unidad de Gestión Contractual">Unidad de Gestión Contractual</option>
+                <option value="Unidad Gestión de Información y Proyectos">Unidad Gestión de Información y Proyectos</option>
+                <option value="Unidad Socioambiental y Paisajismo">Unidad Socioambiental y Paisajismo</option>
+              </select>
               <p class="err text-xs text-rose-500 mt-1 hidden">Este campo es obligatorio.</p>
             </div>
           </div>
@@ -385,7 +398,7 @@
           <svg class="w-10 h-10 text-marca-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
         </div>
         <h3 class="text-2xl font-extrabold mb-2">¡Gracias por participar!</h3>
-        <p class="text-slate-500 dark:text-slate-400 max-w-md mx-auto">Su autoevaluación de riesgos del Primer Cuatrimestre de 2025 fue registrada correctamente.</p>
+        <p class="text-slate-500 dark:text-slate-400 max-w-md mx-auto">Su autoevaluación de riesgos del Primer Semestre de 2026 fue registrada correctamente.</p>
         <div class="mt-6 flex flex-wrap gap-3 justify-center">
           <button id="btn-otra" class="rounded-xl bg-marca-600 hover:bg-marca-700 text-white font-semibold px-5 py-2.5 transition">Diligenciar otra</button>
           <button id="btn-ver-resultados" class="rounded-xl border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 font-semibold px-5 py-2.5 transition">Ver resultados</button>
@@ -500,7 +513,7 @@
         <img src="img/logo-alcaldia-medellin.png" alt="Alcaldía de Medellín · Distrito de Ciencia, Tecnología e Innovación" class="h-12 w-auto block" />
       </div>
       <p class="text-xs text-slate-500 dark:text-slate-400 max-w-md">
-        Aplicativo de autoevaluación de riesgos · Proceso de Gestión de la Obra Pública · Primer cuatrimestre 2025
+        Aplicativo de autoevaluación de riesgos · Proceso de Gestión de la Obra Pública · Primer Semestre 2026
       </p>
       <p class="text-[11px] text-slate-400 dark:text-slate-500 font-semibold tracking-wide">Alcaldía de Medellín · Distrito de Ciencia, Tecnología e Innovación</p>
     </div>
