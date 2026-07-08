@@ -315,6 +315,7 @@
                 <span class="flex-1">
                   Otro:
                   <input id="f-r3-otro" name="riesgo3_otro" type="text" class="mt-1.5 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-1.5 text-sm focus:ring-2 focus:ring-marca-400" placeholder="Describa (si aplica más de un caso, descríbalos aquí)…" disabled>
+                  <span id="err-r3-otro" class="block text-xs text-rose-500 mt-1 hidden">Describa la opción «Otro».</span>
                 </span>
               </label>
             </div>
@@ -347,15 +348,15 @@
           </p>
 
           <fieldset class="pregunta" data-req="1">
-            <legend class="text-sm font-semibold mb-2">1. ¿Considera que en algún contrato/proyecto se ha presentado este riesgo? <span class="text-rose-500">*</span></legend>
+            <legend class="text-sm font-semibold mb-2">1. ¿Algún contrato/proyecto se ha visto afectado por el aumento de solicitudes de estudios y diseños o de obras extras, generadas por emergencias o situaciones asociadas al cambio climático? <span class="text-rose-500">*</span></legend>
             <div class="grid gap-2" data-radios="riesgo4_tipo">
               <label class="opcion cursor-pointer flex gap-3 items-start rounded-xl border border-slate-300 dark:border-slate-700 p-3 text-sm">
                 <input type="radio" name="riesgo4_tipo" value="si" class="mt-0.5 accent-marca-600">
-                <span>Sí, se ha presentado.</span>
+                <span>Sí, se ha visto afectado.</span>
               </label>
               <label class="opcion cursor-pointer flex gap-3 items-start rounded-xl border border-slate-300 dark:border-slate-700 p-3 text-sm">
                 <input type="radio" name="riesgo4_tipo" value="no" class="mt-0.5 accent-marca-600">
-                <span>No se ha presentado.</span>
+                <span>No se ha visto afectado.</span>
               </label>
             </div>
             <p class="err text-xs text-rose-500 mt-1.5 hidden">Selecciona una opción.</p>
@@ -385,15 +386,15 @@
           </p>
 
           <fieldset class="pregunta" data-req="1">
-            <legend class="text-sm font-semibold mb-2">1. ¿Considera que en algún contrato/proyecto se ha presentado este riesgo? <span class="text-rose-500">*</span></legend>
+            <legend class="text-sm font-semibold mb-2">1. ¿Algún contrato/proyecto se ha visto afectado por alteraciones en la prestación del servicio de transporte propio y contratado, debido a dificultades de movilidad generadas por deslizamientos e inundaciones en la ciudad? <span class="text-rose-500">*</span></legend>
             <div class="grid gap-2" data-radios="riesgo5_tipo">
               <label class="opcion cursor-pointer flex gap-3 items-start rounded-xl border border-slate-300 dark:border-slate-700 p-3 text-sm">
                 <input type="radio" name="riesgo5_tipo" value="si" class="mt-0.5 accent-marca-600">
-                <span>Sí, se ha presentado.</span>
+                <span>Sí, se ha visto afectado.</span>
               </label>
               <label class="opcion cursor-pointer flex gap-3 items-start rounded-xl border border-slate-300 dark:border-slate-700 p-3 text-sm">
                 <input type="radio" name="riesgo5_tipo" value="no" class="mt-0.5 accent-marca-600">
-                <span>No se ha presentado.</span>
+                <span>No se ha visto afectado.</span>
               </label>
             </div>
             <p class="err text-xs text-rose-500 mt-1.5 hidden">Selecciona una opción.</p>
@@ -423,15 +424,15 @@
           </p>
 
           <fieldset class="pregunta" data-req="1">
-            <legend class="text-sm font-semibold mb-2">1. ¿Considera que en algún contrato/proyecto se ha presentado este riesgo? <span class="text-rose-500">*</span></legend>
+            <legend class="text-sm font-semibold mb-2">1. ¿Algún contrato/proyecto se ha visto afectado por el aumento de las tasas de ausentismo de personal por enfermedades respiratorias asociadas al cambio climático? <span class="text-rose-500">*</span></legend>
             <div class="grid gap-2" data-radios="riesgo6_tipo">
               <label class="opcion cursor-pointer flex gap-3 items-start rounded-xl border border-slate-300 dark:border-slate-700 p-3 text-sm">
                 <input type="radio" name="riesgo6_tipo" value="si" class="mt-0.5 accent-marca-600">
-                <span>Sí, se ha presentado.</span>
+                <span>Sí, se ha visto afectado.</span>
               </label>
               <label class="opcion cursor-pointer flex gap-3 items-start rounded-xl border border-slate-300 dark:border-slate-700 p-3 text-sm">
                 <input type="radio" name="riesgo6_tipo" value="no" class="mt-0.5 accent-marca-600">
-                <span>No se ha presentado.</span>
+                <span>No se ha visto afectado.</span>
               </label>
             </div>
             <p class="err text-xs text-rose-500 mt-1.5 hidden">Selecciona una opción.</p>
@@ -637,8 +638,8 @@
   </footer>
 
   <!-- Botón volver arriba -->
-  <button id="btn-arriba" class="fixed bottom-5 left-5 z-40 hidden w-11 h-11 rounded-full bg-slate-800 dark:bg-slate-200 text-white dark:text-slate-900 shadow-lg grid place-items-center hover:scale-105 transition">
-    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+  <button id="btn-arriba" title="Volver arriba" aria-label="Volver arriba" class="fixed bottom-5 left-5 z-40 hidden w-11 h-11 rounded-full bg-slate-800 dark:bg-slate-200 text-white dark:text-slate-900 shadow-lg grid place-items-center hover:scale-105 transition">
+    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6"/></svg>
   </button>
 
   <!-- Contenedor de toasts -->
