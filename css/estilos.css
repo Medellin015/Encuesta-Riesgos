@@ -1,0 +1,145 @@
+/* ============================================================================
+   Estilos propios · Encuesta de Autoevaluación de Riesgos
+   Complementan a Tailwind (CDN). Paleta de marca: verde lima + dorado (sol).
+   ============================================================================ */
+:root { color-scheme: light dark; }
+
+/* ===== Fondo base + malla decorativa de degradados ===== */
+html            { background-color: #f3f6ee; }
+html.dark       { background-color: #080d17; }
+
+.fondo-deco {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(55rem 40rem at 100% -12%, rgba(156, 200, 74, .22), transparent 60%),
+    radial-gradient(48rem 38rem at -12% 18%, rgba(245, 166, 35, .13), transparent 55%),
+    radial-gradient(42rem 32rem at 50% 118%, rgba(127, 174, 47, .16), transparent 60%);
+}
+html.dark .fondo-deco {
+  background:
+    radial-gradient(55rem 40rem at 100% -12%, rgba(127, 174, 47, .20), transparent 60%),
+    radial-gradient(48rem 38rem at -12% 18%, rgba(245, 166, 35, .08), transparent 55%),
+    radial-gradient(42rem 32rem at 50% 118%, rgba(56, 89, 31, .30), transparent 60%);
+}
+
+/* ===== Animaciones base ===== */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes pop { 0% { transform: scale(.96); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+.anim-fade { animation: fadeIn .35s ease both; }
+.anim-up   { animation: slideUp .5s cubic-bezier(.2,.7,.3,1) both; }
+.anim-pop  { animation: pop .3s ease both; }
+
+/* ===== Encabezado tipo vidrio (glassmorphism) ===== */
+.vidrio-header {
+  background: rgba(255, 255, 255, .72);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+}
+html.dark .vidrio-header { background: rgba(15, 23, 42, .72); }
+
+/* ===== Insignia blanca para el logo (legible en claro y oscuro) ===== */
+.logo-badge {
+  display: inline-flex;
+  align-items: center;
+  background: #fff;
+  border-radius: .85rem;
+  padding: .3rem .55rem;
+  box-shadow: 0 4px 14px -6px rgba(15, 23, 42, .25), 0 0 0 1px rgba(15, 23, 42, .05);
+}
+html.dark .logo-badge {
+  box-shadow: 0 6px 20px -8px rgba(0, 0, 0, .65), 0 0 0 1px rgba(255, 255, 255, .10);
+}
+
+/* ===== Portada / héroe con degradado animado ===== */
+.portada {
+  background: linear-gradient(120deg, #4c691f 0%, #638a23 24%, #7fae2f 50%, #2f9e6f 76%, #0f766e 100%);
+  background-size: 220% 220%;
+  animation: gradiente 16s ease infinite;
+}
+@keyframes gradiente {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Blobs flotantes decorativos */
+@keyframes flotar {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(8px, -14px) scale(1.06); }
+  66%      { transform: translate(-6px, 10px) scale(.96); }
+}
+.blob { animation: flotar 13s ease-in-out infinite; filter: blur(2px); }
+
+/* Barrido de brillo sobre la portada */
+.brillo {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(115deg, transparent 32%, rgba(255, 255, 255, .16) 48%, transparent 64%);
+  background-size: 260% 260%;
+  animation: barrido 8s ease-in-out infinite;
+}
+@keyframes barrido {
+  0%        { background-position: 130% 0; }
+  55%, 100% { background-position: -40% 0; }
+}
+
+/* ===== Scrollbar discreta ===== */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: #c8ccd4; border-radius: 999px; border: 2px solid transparent; background-clip: content-box; }
+html.dark ::-webkit-scrollbar-thumb { background: #3a4150; background-clip: content-box; }
+::-webkit-scrollbar-track { background: transparent; }
+
+/* ===== Transición de vistas ===== */
+.vista { display: none; }
+.vista.activa { display: block; }
+
+/* ===== Tarjeta con elevación al pasar el cursor ===== */
+.tarjeta {
+  transition: box-shadow .3s ease, transform .3s cubic-bezier(.2,.7,.3,1), border-color .3s ease;
+}
+.tarjeta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 42px -20px rgba(56, 89, 31, .38);
+  border-color: rgba(156, 200, 74, .55);
+}
+
+/* ===== Chip de opción tipo formulario ===== */
+.opcion { transition: all .18s ease; }
+.opcion:hover { border-color: #9cc84a; background: rgba(156, 200, 74, .06); transform: translateY(-1px); }
+.opcion.sel {
+  border-color: #7fae2f;
+  background: rgba(156, 200, 74, .14);
+  box-shadow: 0 0 0 1px #7fae2f inset, 0 8px 18px -12px rgba(127, 174, 47, .65);
+}
+
+/* ===== Botón primario con degradado y resplandor ===== */
+.btn-primario {
+  background: linear-gradient(135deg, #7fae2f, #638a23);
+  box-shadow: 0 10px 24px -10px rgba(127, 174, 47, .7);
+}
+.btn-primario:hover:not(:disabled) {
+  background: linear-gradient(135deg, #8dbb3a, #6d962a);
+  box-shadow: 0 16px 32px -10px rgba(127, 174, 47, .85);
+  transform: translateY(-1px);
+}
+.btn-primario:active:not(:disabled) { transform: translateY(0); }
+
+/* ===== Toast ===== */
+#toasts { position: fixed; z-index: 90; right: 1rem; bottom: 1rem; display: flex; flex-direction: column; gap: .5rem; }
+.toast { animation: slideUp .3s ease both; }
+
+/* ===== Foco de campos ===== */
+input:focus, textarea:focus, select:focus { outline: none; }
+
+canvas { max-width: 100%; }
+
+/* ===== Accesibilidad: respeta la preferencia de menos movimiento ===== */
+@media (prefers-reduced-motion: reduce) {
+  .portada, .blob, .brillo { animation: none; }
+  .tarjeta:hover, .opcion:hover, .btn-primario:hover:not(:disabled) { transform: none; }
+}

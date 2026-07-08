@@ -1,0 +1,21 @@
+# ============================================================================
+# Credenciales de administrador de Firebase (service account / clave privada).
+# ¡NUNCA subir estos archivos al repositorio! Solo se usan del lado servidor.
+# ============================================================================
+*serviceAccount*.json
+*service-account*.json
+*firebase-adminsdk*.json
+*firebaseadminsdk*.json
+serviceAccountKey.json
+.env
+.env.*
+
+# Dependencias
+node_modules/
+
+# Archivos del sistema / editor
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/
