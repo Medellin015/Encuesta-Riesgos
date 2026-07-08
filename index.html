@@ -351,12 +351,20 @@
             <legend class="text-sm font-semibold mb-2">1. ¿Algún contrato/proyecto se ha visto afectado por el aumento de solicitudes de estudios y diseños o de obras extras, generadas por emergencias o situaciones asociadas al cambio climático? <span class="text-rose-500">*</span></legend>
             <div class="grid gap-2" data-radios="riesgo4_tipo">
               <label class="opcion cursor-pointer flex gap-3 items-start rounded-xl border border-slate-300 dark:border-slate-700 p-3 text-sm">
-                <input type="radio" name="riesgo4_tipo" value="si" class="mt-0.5 accent-marca-600">
+                <input type="radio" name="riesgo4_tipo" value="afectado" class="mt-0.5 accent-marca-600">
                 <span>Sí, se ha visto afectado.</span>
               </label>
               <label class="opcion cursor-pointer flex gap-3 items-start rounded-xl border border-slate-300 dark:border-slate-700 p-3 text-sm">
-                <input type="radio" name="riesgo4_tipo" value="no" class="mt-0.5 accent-marca-600">
-                <span>No se ha visto afectado.</span>
+                <input type="radio" name="riesgo4_tipo" value="no_afectado" class="mt-0.5 accent-marca-600">
+                <span>El contrato / proyecto no se ha visto afectado.</span>
+              </label>
+              <label class="opcion cursor-pointer flex gap-3 items-start rounded-xl border border-slate-300 dark:border-slate-700 p-3 text-sm">
+                <input type="radio" name="riesgo4_tipo" value="otro" class="mt-0.5 accent-marca-600">
+                <span class="flex-1">
+                  Otro:
+                  <input id="f-r4-otro" name="riesgo4_otro" type="text" class="mt-1.5 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-1.5 text-sm focus:ring-2 focus:ring-marca-400" placeholder="Describa (si aplica más de un caso, descríbalos aquí)…" disabled>
+                  <span id="err-r4-otro" class="block text-xs text-rose-500 mt-1 hidden">Describa la opción «Otro».</span>
+                </span>
               </label>
             </div>
             <p class="err text-xs text-rose-500 mt-1.5 hidden">Selecciona una opción.</p>
@@ -389,12 +397,20 @@
             <legend class="text-sm font-semibold mb-2">1. ¿Algún contrato/proyecto se ha visto afectado por alteraciones en la prestación del servicio de transporte propio y contratado, debido a dificultades de movilidad generadas por deslizamientos e inundaciones en la ciudad? <span class="text-rose-500">*</span></legend>
             <div class="grid gap-2" data-radios="riesgo5_tipo">
               <label class="opcion cursor-pointer flex gap-3 items-start rounded-xl border border-slate-300 dark:border-slate-700 p-3 text-sm">
-                <input type="radio" name="riesgo5_tipo" value="si" class="mt-0.5 accent-marca-600">
+                <input type="radio" name="riesgo5_tipo" value="afectado" class="mt-0.5 accent-marca-600">
                 <span>Sí, se ha visto afectado.</span>
               </label>
               <label class="opcion cursor-pointer flex gap-3 items-start rounded-xl border border-slate-300 dark:border-slate-700 p-3 text-sm">
-                <input type="radio" name="riesgo5_tipo" value="no" class="mt-0.5 accent-marca-600">
-                <span>No se ha visto afectado.</span>
+                <input type="radio" name="riesgo5_tipo" value="no_afectado" class="mt-0.5 accent-marca-600">
+                <span>El contrato / proyecto no se ha visto afectado.</span>
+              </label>
+              <label class="opcion cursor-pointer flex gap-3 items-start rounded-xl border border-slate-300 dark:border-slate-700 p-3 text-sm">
+                <input type="radio" name="riesgo5_tipo" value="otro" class="mt-0.5 accent-marca-600">
+                <span class="flex-1">
+                  Otro:
+                  <input id="f-r5-otro" name="riesgo5_otro" type="text" class="mt-1.5 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-1.5 text-sm focus:ring-2 focus:ring-marca-400" placeholder="Describa (si aplica más de un caso, descríbalos aquí)…" disabled>
+                  <span id="err-r5-otro" class="block text-xs text-rose-500 mt-1 hidden">Describa la opción «Otro».</span>
+                </span>
               </label>
             </div>
             <p class="err text-xs text-rose-500 mt-1.5 hidden">Selecciona una opción.</p>
@@ -427,12 +443,20 @@
             <legend class="text-sm font-semibold mb-2">1. ¿Algún contrato/proyecto se ha visto afectado por el aumento de las tasas de ausentismo de personal por enfermedades respiratorias asociadas al cambio climático? <span class="text-rose-500">*</span></legend>
             <div class="grid gap-2" data-radios="riesgo6_tipo">
               <label class="opcion cursor-pointer flex gap-3 items-start rounded-xl border border-slate-300 dark:border-slate-700 p-3 text-sm">
-                <input type="radio" name="riesgo6_tipo" value="si" class="mt-0.5 accent-marca-600">
+                <input type="radio" name="riesgo6_tipo" value="afectado" class="mt-0.5 accent-marca-600">
                 <span>Sí, se ha visto afectado.</span>
               </label>
               <label class="opcion cursor-pointer flex gap-3 items-start rounded-xl border border-slate-300 dark:border-slate-700 p-3 text-sm">
-                <input type="radio" name="riesgo6_tipo" value="no" class="mt-0.5 accent-marca-600">
-                <span>No se ha visto afectado.</span>
+                <input type="radio" name="riesgo6_tipo" value="no_afectado" class="mt-0.5 accent-marca-600">
+                <span>El contrato / proyecto no se ha visto afectado.</span>
+              </label>
+              <label class="opcion cursor-pointer flex gap-3 items-start rounded-xl border border-slate-300 dark:border-slate-700 p-3 text-sm">
+                <input type="radio" name="riesgo6_tipo" value="otro" class="mt-0.5 accent-marca-600">
+                <span class="flex-1">
+                  Otro:
+                  <input id="f-r6-otro" name="riesgo6_otro" type="text" class="mt-1.5 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-1.5 text-sm focus:ring-2 focus:ring-marca-400" placeholder="Describa (si aplica más de un caso, descríbalos aquí)…" disabled>
+                  <span id="err-r6-otro" class="block text-xs text-rose-500 mt-1 hidden">Describa la opción «Otro».</span>
+                </span>
               </label>
             </div>
             <p class="err text-xs text-rose-500 mt-1.5 hidden">Selecciona una opción.</p>
