@@ -266,7 +266,7 @@ function validar() {
   const fallar = (cont) => { marcarError(cont, true); ok = false; if (!primerError) primerError = cont; };
 
   // Texto obligatorio
-  const reqTexto = [['#f-nombre'], ['#f-unidad']];
+  const reqTexto = [['#f-nombre'], ['#f-unidad'], ['#f-observaciones']];
   reqTexto.forEach(([sel]) => {
     const el = $(sel);
     const cont = el.closest('div');
